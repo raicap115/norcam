@@ -23,7 +23,12 @@ namespace norcam.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Logincli()
+        {
+            return View();
+        }
+
+        public IActionResult Loginadm()
         {
             return View();
         }
