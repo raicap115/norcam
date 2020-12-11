@@ -23,22 +23,7 @@ namespace norcam.Controllers
             return View();
         }
 
-        public IActionResult Nosotros()
-        {
-            return View();
-        }
-
-        public IActionResult Servicios()
-        {
-            return View();
-        }
-
-        public IActionResult Cartera()
-        {
-            return View();
-        }
-
-        public IActionResult Contacto()
+        public IActionResult Privacy()
         {
             return View();
         }
