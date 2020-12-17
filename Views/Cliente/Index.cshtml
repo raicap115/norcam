@@ -1,0 +1,46 @@
+ @{
+    ViewData["Title"] = "Facturas";
+}
+
+@{
+    Layout="_LayoutCInt";
+}
+
+<div style="margin-top: 15px;">
+    <ul class="nav nav-tabs dark">
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Ordenes" asp-action="Index">ÓRDENES</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" asp-controller="Facturas" asp-action="Index">FACTURAS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Recibos" asp-action="Index">RECIBOS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="#">CTA. CTES.</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="#">CLIENTES</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <table class="table table-hover" style="margin-top: 35px;">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Código</th>
+                <th style="text-align: center;">Razón Social</th>
+                <th style="text-align: center;">RUC</th>
+                <th style="text-align: center;">Dirección</th>
+                <th style="text-align: center;">Teléfono</th>
+                <th style="text-align: center;">FAX</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
