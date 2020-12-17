@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Órdenes de Trabajo";
+}
+
+@{
+    Layout="_LayoutCInt";
+}
+
+<div style="margin-top: 15px;">
+    <ul class="nav nav-tabs dark">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" asp-controller="Ordenes" asp-action="Index">ÓRDENES</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Facturas" asp-action="Index">FACTURAS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Recibos" asp-action="Index">RECIBOS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-action="#">CTA. CTES.</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Cliente" asp-action="Index">CLIENTES</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <table class="table table-hover" style="margin-top: 35px;">
+        <thead>
+            <tr>
+                <th style="text-align: center;"># Orden</th>
+                <th style="text-align: center;">Recepción</th>
+                <th style="text-align: center;">Cliente</th>
+                <th style="text-align: center;">Contenido</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
