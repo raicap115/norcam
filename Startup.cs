@@ -12,6 +12,7 @@ using norcam.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace norcam
 {
@@ -27,12 +28,15 @@ namespace norcam
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+<<<<<<< HEAD
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgressConnection")));
+=======
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
                     Configuration.GetConnectionString("PostgressConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+>>>>>>> 76df2199fc662e01f245ef0cd96d3d4a2aaf7a1e
             services.AddControllersWithViews();
-           services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
