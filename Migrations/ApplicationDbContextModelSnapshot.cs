@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using norcam.Data;
 
+<<<<<<< HEAD
 namespace norcam.Data.Migrations
+=======
+namespace norcam.Migrations
+>>>>>>> 76df2199fc662e01f245ef0cd96d3d4a2aaf7a1e
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -19,6 +23,7 @@ namespace norcam.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+<<<<<<< HEAD
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -213,6 +218,8 @@ namespace norcam.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+=======
+>>>>>>> 76df2199fc662e01f245ef0cd96d3d4a2aaf7a1e
             modelBuilder.Entity("norcam.Models.Cliente", b =>
                 {
                     b.Property<int>("id")
@@ -350,6 +357,7 @@ namespace norcam.Data.Migrations
                     b.ToTable("Ordenes");
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -401,6 +409,8 @@ namespace norcam.Data.Migrations
                         .IsRequired();
                 });
 
+=======
+>>>>>>> 76df2199fc662e01f245ef0cd96d3d4a2aaf7a1e
             modelBuilder.Entity("norcam.Models.Ordenes", b =>
                 {
                     b.HasOne("norcam.Models.Cliente", "id_cliente")
