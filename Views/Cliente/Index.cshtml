@@ -2,9 +2,13 @@
     ViewData["Title"] = "Facturas";
 }
 
+@model List<Cliente>
+
 @{
     Layout="_LayoutCInt";
 }
+
+
 
 <div style="margin-top: 15px;">
     <ul class="nav nav-tabs dark">
@@ -40,13 +44,14 @@
                     <th style="text-align: center;">Teléfono</th>
                     <th style="text-align: center;">FAX</th>
                 </tr>
-            </thead>
+            </thead>            
             <tbody>
-
-<<<<<<< HEAD
-        </tbody>
-    </table>
-=======
+                @foreach(var Cliente in Model)
+                {
+                <tr>                    
+                    <td></td>
+                </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -54,7 +59,63 @@
         <form action="" method="post">
             <table style="text-align: center;">
                 <tr>
-                    <td><input style="margin-top: 120px;" type="button" class="btn btn-info" value="NUEVO"></td>
+                    <td>
+                        <button type="button" style="margin-top: 120px;" class="btn btn-info" data-toggle="modal" data-target="#nuevoCliente" >
+                            NUEVO
+                        </button>
+                    </td>
+                    <!-- Modal -->
+                    <div class="modal fade" id="nuevoCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Nuevo Cliente</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container h-100">
+                            <form method="post" action="">
+                                <div class="form-group">
+                                    <label>Razon Soci</label>
+                                    <input type="text" asp-for="razon_social" class="form-control" placeholder="Ej: NORCAM S.A.">
+                                    <span asp-validation-for="razon_social" class="text-danger"></span>  
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ruc"></label>
+                                    <input type="text" asp-for="ruc" class="form-control" placeholder="Ej: 10102892964">
+                                    <span asp-validation-for="ruc" class="text-danger"></span>  
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="direccion"></label>
+                                    <input type="text" asp-for="direccion" class="form-control" placeholder="Ej: Calle Las begonias 123">
+                                    <span asp-validation-for="direccion" class="text-danger"></span>  
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="telefono"></label>
+                                    <input type="text" asp-for="telefono" class="form-control" placeholder="Ej: +51 922 653 075">
+                                    <span asp-validation-for="telefono" class="text-danger"></span>  
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="fax"></label>
+                                    <input type="text" asp-for="fax" class="form-control" placeholder="Ej: 9987889">
+                                    <span asp-validation-for="fax" class="text-danger"></span>  
+                                </div>
+                            </form>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="button" class="btn login_btn">Login</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 </tr>
                 <tr>
                     <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="MODIFICAR"></td>
@@ -68,6 +129,5 @@
             </table>
         </form>
     </div>
->>>>>>> 3526513911118771578f0cfda81bfae5a4046c0a
 </div>
 
