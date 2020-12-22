@@ -2,7 +2,7 @@
     ViewData["Title"] = "Facturas";
 }
 
-@model List<Cliente>
+@model Cliente;
 
 @{
     Layout="_LayoutCInt";
@@ -46,12 +46,7 @@
                 </tr>
             </thead>            
             <tbody>
-                @foreach(var Cliente in Model)
-                {
-                <tr>                    
-                    <td></td>
-                </tr>
-                }
+                
             </tbody>
         </table>
     </div>
@@ -80,7 +75,7 @@
                             <div class="container h-100">
                             <form method="post" action="">
                                 <div class="form-group">
-                                    <label>Razon Soci</label>
+                                    <label asp-for="razon_social"></label>
                                     <input type="text" asp-for="razon_social" class="form-control" placeholder="Ej: NORCAM S.A.">
                                     <span asp-validation-for="razon_social" class="text-danger"></span>  
                                 </div>
@@ -110,8 +105,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" name="button" class="btn login_btn">Login</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                            <button type="submit" name="button" class="btn login_btn">Grabar</button>
                         </div>
                         </div>
                     </div>
