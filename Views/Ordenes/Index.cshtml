@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "Órdenes de Trabajo";
 }
-@model Ordenes;
+@model Ordenes
 @{
     Layout="_LayoutCInt";
 }
@@ -77,18 +77,13 @@
                                     <span asp-validation-for="fec_rec" class="text-danger"></span>  
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="id_cliente"></label>
-                                    <input type="text" asp-for="id_cliente" class="form-control">
-                                    <span asp-validation-for="id_cliente" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
                                     <label asp-for="proveedor"></label>
                                     <input type="text" asp-for="proveedor" class="form-control">
                                     <span asp-validation-for="proveedor" class="text-danger"></span>  
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="contenido"></label>
-                                    <input type="text" asp-for="contenido" class="form-control>
+                                    <input type="text" asp-for="contenido" class="form-control">
                                     <span asp-validation-for="contenido" class="text-danger"></span>  
                                 </div>
                                 <div class="form-group">

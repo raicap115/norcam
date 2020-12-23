@@ -25,8 +25,16 @@ namespace norcam.Controllers
             return View(cliente);
         }
 
+         [HttpGet]
+        public IActionResult Create()
+        {
+            Cliente cli= new Cliente();
+            return PartialView("_NuevoClientePartial",cli);
+        }
+
+
         [HttpPost]
-        public IActionResult Index(Cliente objCliente)
+        public IActionResult _NuevoClientePartial(Cliente objCliente)
         {
             if (ModelState.IsValid) {
 

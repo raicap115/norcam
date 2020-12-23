@@ -10,8 +10,8 @@ using norcam.Data;
 namespace norcam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201217041149_Models")]
-    partial class Models
+    [Migration("20201223212234_Nuevoo")]
+    partial class Nuevoo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,18 +29,23 @@ namespace norcam.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("direccion")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("fax")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("razon_social")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ruc")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("telefono")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("id");
@@ -121,6 +126,9 @@ namespace norcam.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int?>("cod_clienteid")
+                        .HasColumnType("integer");
+
                     b.Property<string>("contenido")
                         .HasColumnType("text");
 
@@ -132,9 +140,6 @@ namespace norcam.Migrations
 
                     b.Property<string>("fec_rec")
                         .HasColumnType("text");
-
-                    b.Property<int?>("id_clienteid")
-                        .HasColumnType("integer");
 
                     b.Property<string>("peso")
                         .HasColumnType("text");
@@ -153,16 +158,16 @@ namespace norcam.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("id_clienteid");
+                    b.HasIndex("cod_clienteid");
 
                     b.ToTable("Ordenes");
                 });
 
             modelBuilder.Entity("norcam.Models.Ordenes", b =>
                 {
-                    b.HasOne("norcam.Models.Cliente", "id_cliente")
+                    b.HasOne("norcam.Models.Cliente", "cod_cliente")
                         .WithMany()
-                        .HasForeignKey("id_clienteid");
+                        .HasForeignKey("cod_clienteid");
                 });
 #pragma warning restore 612, 618
         }

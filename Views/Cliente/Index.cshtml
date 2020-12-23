@@ -2,7 +2,7 @@
     ViewData["Title"] = "Facturas";
 }
 
-@model Cliente;
+@model IEnumerable<Cliente>
 
 @{
     Layout="_LayoutCInt";
@@ -33,20 +33,56 @@
     </ul>
 </div>
 
+<div id="PlaceHolderHere"></div>
 <div class="row">
     <div class="col-md-10">
         <table class="table table-hover" style="margin-top: 35px;">
             <thead>
                 <tr>
-                    <th style="text-align: center;">Código</th>
-                    <th style="text-align: center;">Razón Social</th>
-                    <th style="text-align: center;">RUC</th>
-                    <th style="text-align: center;">Teléfono</th>
-                    <th style="text-align: center;">FAX</th>
+                    <th style="text-align: center;">
+                        Código
+                    </th>
+                    <th style="text-align: center;">
+                        @Html.DisplayNameFor(model=> model.razon_social)
+                    </th>
+                    <th style="text-align: center;">
+                        @Html.DisplayNameFor(model=> model.ruc)
+                    </th>
+                    <th style="text-align: center;">
+                        @Html.DisplayNameFor(model=> model.direccion)
+                    </th>
+                    <th style="text-align: center;">
+                        @Html.DisplayNameFor(model=> model.telefono)
+                    </th>
+                    <th style="text-align: center;">
+                        @Html.DisplayNameFor(model=> model.fax)
+                    </th>
                 </tr>
             </thead>            
             <tbody>
-                
+               @foreach (var cliente in Model)
+               {
+                   <tr>
+                       <td>
+                           @Html.DisplayFor(modelItem=> cliente.id)
+                       </td>
+                       <td>
+                           @Html.DisplayFor(modelItem=> cliente.razon_social)
+                       </td>
+                       <td>
+                           @Html.DisplayFor(modelItem=> cliente.ruc)
+                       </td>
+                       <td>
+                           @Html.DisplayFor(modelItem=> cliente.direccion)
+                       </td>
+                       <td>
+                           @Html.DisplayFor(modelItem=> cliente.telefono)
+                       </td>
+                       <td>
+                           @Html.DisplayFor(modelItem=> cliente.fax)
+                       </td>
+                   </tr>
+               }
             </tbody>
         </table>
     </div>
@@ -55,62 +91,9 @@
             <table style="text-align: center;">
                 <tr>
                     <td>
-                        <button type="button" style="margin-top: 120px;" class="btn btn-info" data-toggle="modal" data-target="#nuevoCliente" >
-                            NUEVO
-                        </button>
-                    </td>
-                    <!-- Modal -->
-                    <div class="modal fade" id="nuevoCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nuevo Cliente</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="container h-100">
-                            <form method="post" action="">
-                                <div class="form-group">
-                                    <label asp-for="razon_social"></label>
-                                    <input type="text" asp-for="razon_social" class="form-control" placeholder="Ej: NORCAM S.A.">
-                                    <span asp-validation-for="razon_social" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="ruc"></label>
-                                    <input type="text" asp-for="ruc" class="form-control" placeholder="Ej: 10102892964">
-                                    <span asp-validation-for="ruc" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="direccion"></label>
-                                    <input type="text" asp-for="direccion" class="form-control" placeholder="Ej: Calle Las begonias 123">
-                                    <span asp-validation-for="direccion" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="telefono"></label>
-                                    <input type="text" asp-for="telefono" class="form-control" placeholder="Ej: +51 922 653 075">
-                                    <span asp-validation-for="telefono" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="fax"></label>
-                                    <input type="text" asp-for="fax" class="form-control" placeholder="Ej: 9987889">
-                                    <span asp-validation-for="fax" class="text-danger"></span>  
-                                </div>
-                            </form>
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                            <button type="submit" name="button" class="btn login_btn">Grabar</button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+                        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addCliente" 
+                        data-url="@Url.Action("Create")">NUEVO</button>
+                    </td>                    
                 </tr>
                 <tr>
                     <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="MODIFICAR"></td>

@@ -21,20 +21,9 @@ namespace norcam.Controllers
         
         public IActionResult Index()
         {
-            var orden = _context.Ordenes.ToList();
-            return View(orden);
+            return View();
         }
 
-        [HttpPost]
-        public IActionResult Index(Ordenes objOrden)
-        {
-            if (ModelState.IsValid) {
-
-                _context.Add(objOrden);
-                _context.SaveChanges();
-            }
-
-            return View("Index");
-        }
+        
     }
 }
