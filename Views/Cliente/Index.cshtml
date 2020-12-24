@@ -54,6 +54,12 @@
                     <th style="text-align: center;">
                         @Html.DisplayNameFor(model=> model.fax)
                     </th>
+                    <th style="text-align: center; font-weight: bold;">
+                        Editar
+                    </th>
+                    <th style="text-align: center; font-weight: bold;">
+                        Anular
+                    </th>
                 </tr>
             </thead>            
             <tbody>
@@ -78,6 +84,18 @@
                        <td>
                            @Html.DisplayFor(modelItem=> cliente.fax)
                        </td>
+                       <td>
+                           <form action="Editar" method="post">
+                               <input type="hidden" value="@cliente.id">
+                               <button class="btn btn-warning">Editar</button>
+                           </form>
+                       </td>
+                       <td>
+                           <form action="Editar" method="post">
+                               <input type="hidden" value="@cliente.id">
+                               <button class="btn btn-danger">Anular</button>
+                           </form>
+                       </td>
                    </tr>
                }
             </tbody>
@@ -88,15 +106,9 @@
             <table style="text-align: center;">
                 <tr>
                     <td>
-                        <button style="margin-top: 120px;" type="button" class="btn btn-info" data-toggle="ajax-modal" data-target="#addCliente" 
+                        <buttontype="button" class="btn btn-info" data-toggle="ajax-modal" data-target="#addCliente" 
                         data-url="@Url.Action("Create")">NUEVO</button>
                     </td>                    
-                </tr>
-                <tr>
-                    <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="MODIFICAR"></td>
-                </tr>
-                <tr>
-                    <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="ANULAR"></td>
                 </tr>
                 <tr>
                     <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="BUSCAR"></td>

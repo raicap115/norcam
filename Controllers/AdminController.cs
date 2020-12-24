@@ -57,8 +57,9 @@ namespace norcam.Controllers
         public IActionResult Registro(string correo, string lastname, string password)
         {
             var user = new IdentityUser();
-            user.Email = correo;
             user.UserName = lastname;
+            user.Email = correo;
+            
 
             var result = _um.CreateAsync(user, password).Result;
 
