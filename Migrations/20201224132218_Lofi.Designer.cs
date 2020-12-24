@@ -10,8 +10,8 @@ using norcam.Data;
 namespace norcam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201223212234_Nuevoo")]
-    partial class Nuevoo
+    [Migration("20201224132218_Lofi")]
+    partial class Lofi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,27 @@ namespace norcam.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("norcam.Models.Admin", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("apellido")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nombre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("puesto")
+                        .HasColumnType("text");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Admin");
+                });
 
             modelBuilder.Entity("norcam.Models.Cliente", b =>
                 {
@@ -50,7 +71,7 @@ namespace norcam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Cliente");
                 });
 
             modelBuilder.Entity("norcam.Models.Facturas", b =>
@@ -116,7 +137,7 @@ namespace norcam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Facturas");
+                    b.ToTable("Factura");
                 });
 
             modelBuilder.Entity("norcam.Models.Ordenes", b =>
@@ -160,7 +181,7 @@ namespace norcam.Migrations
 
                     b.HasIndex("cod_clienteid");
 
-                    b.ToTable("Ordenes");
+                    b.ToTable("Orden");
                 });
 
             modelBuilder.Entity("norcam.Models.Ordenes", b =>

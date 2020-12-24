@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using norcam.Data;
 
-namespace norcam.Data.Migrations
+namespace norcam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -160,10 +160,12 @@ namespace norcam.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
@@ -200,10 +202,12 @@ namespace norcam.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
@@ -211,6 +215,27 @@ namespace norcam.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("norcam.Models.Admin", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("apellido")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nombre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("puesto")
+                        .HasColumnType("text");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Admin");
                 });
 
             modelBuilder.Entity("norcam.Models.Cliente", b =>
@@ -242,7 +267,7 @@ namespace norcam.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Cliente");
                 });
 
             modelBuilder.Entity("norcam.Models.Facturas", b =>
@@ -308,28 +333,7 @@ namespace norcam.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Facturas");
-                });
-
-            modelBuilder.Entity("norcam.Models.Home", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("apellido")
-                        .HasColumnType("text");
-
-                    b.Property<string>("nombre")
-                        .HasColumnType("text");
-
-                    b.Property<string>("puesto")
-                        .HasColumnType("text");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Homes");
+                    b.ToTable("Factura");
                 });
 
             modelBuilder.Entity("norcam.Models.Ordenes", b =>
@@ -373,7 +377,7 @@ namespace norcam.Data.Migrations
 
                     b.HasIndex("cod_clienteid");
 
-                    b.ToTable("Ordenes");
+                    b.ToTable("Orden");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

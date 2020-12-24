@@ -9,10 +9,10 @@ namespace norcam.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Ordenes> Ordenes { get; set; }
-        public DbSet<Facturas> Facturas { get; set; }
-        public DbSet<Home> Homes { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Ordenes> Orden { get; set; }
+        public DbSet<Facturas> Factura { get; set; }
+        public DbSet<Admin> Admin { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

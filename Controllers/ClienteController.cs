@@ -21,7 +21,7 @@ namespace norcam.Controllers
         
         public IActionResult Index()
         {
-            var cliente = _context.Clientes.ToList();
+            var cliente = _context.Cliente.ToList();
             return View(cliente);
         }
 
