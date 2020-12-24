@@ -25,21 +25,28 @@ namespace norcam.Controllers
             return View(cliente);
         }
 
-<<<<<<< HEAD
          
-=======
-        [HttpGet]
-        public IActionResult Create()
-        {
-            Cliente cli= new Cliente();
-            return PartialView("_NuevoClientePartial",cli);
-        }
->>>>>>> 2c35d5362133eeae16e8a365838d9802a2906016
 
         [HttpPost]
         public IActionResult Anular(int id){
             var cliente = _context.Cliente.FirstOrDefault(x => x.id == id);
+            _context.Remove(cliente);            
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Cliente cl){
+            Cliente cliente = _context.Cliente.Where(x => x.id == cl.id).FirstOrDefault();
             _context.Remove(cliente);
+            _context.SaveChanges();
+            cliente.razon_social = cl.razon_social;
+            cliente.ruc = cl.ruc;
+            cliente.direccion = cl.direccion;
+            cliente.telefono = cl.telefono;
+            cliente.fax = cl.fax;
+            _context.Add(cliente);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -50,6 +57,10 @@ namespace norcam.Controllers
             return new JsonResult(cliente);
         }
 
+    public IActionResult Nuevo()
+    {
+        return View();
+    }
 
         [HttpPost]
         public IActionResult Nuevo(Cliente objCliente)
@@ -60,7 +71,7 @@ namespace norcam.Controllers
                 _context.SaveChanges();
             }
 
-            return View("Index");
+            return View("Index","Cliente");
         }
     }
 }

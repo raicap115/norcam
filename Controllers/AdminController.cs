@@ -64,7 +64,7 @@ namespace norcam.Controllers
             var result = _um.CreateAsync(user, password).Result;
 
             if (result.Succeeded) {
-                return RedirectToAction("Index", "Ordenes");
+                return RedirectToAction("Loginadm", "Admin");
             }
 
             foreach (var error in result.Errors)
