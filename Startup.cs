@@ -34,12 +34,23 @@ namespace norcam
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
-           services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
                     Configuration.GetConnectionString("PostgressConnection")));
 
+            services.Configure<IdentityOptions>(options => 
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 8;
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
+            });
             
             services.AddControllersWithViews();
-           services.AddRazorPages();
+            services.AddRazorPages();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
