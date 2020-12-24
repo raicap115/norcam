@@ -27,9 +27,6 @@
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" asp-controller="Cliente" asp-action="Index">CLIENTES</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-action="#">ESTADÍSTICA</a>
-        </li>
     </ul>
 </div>
 
@@ -91,7 +88,7 @@
             <table style="text-align: center;">
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addCliente" 
+                        <button style="margin-top: 120px;" type="button" class="btn btn-info" data-toggle="ajax-modal" data-target="#addCliente" 
                         data-url="@Url.Action("Create")">NUEVO</button>
                     </td>                    
                 </tr>
