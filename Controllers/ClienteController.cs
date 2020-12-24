@@ -25,11 +25,25 @@ namespace norcam.Controllers
             return View(cliente);
         }
 
-         [HttpGet]
+        [HttpGet]
         public IActionResult Create()
         {
             Cliente cli= new Cliente();
             return PartialView("_NuevoClientePartial",cli);
+        }
+
+        [HttpPost]
+        public IActionResult Anular(int id){
+            var cliente = _context.Cliente.FirstOrDefault(x => x.id == id);
+            _context.Remove(cliente);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Route("buscar/{id}")]
+        public IActionResult Buscar(int id){
+            var cliente = _context.Cliente.Find(id);
+            return new JsonResult(cliente);
         }
 
 
