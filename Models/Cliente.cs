@@ -6,6 +6,7 @@ namespace norcam.Models
     public class Cliente
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name="ID Cliente")]
         public int id { get; set; }
 
         [Required(ErrorMessage="Por favor, Ingrese una razón social")]
@@ -13,7 +14,7 @@ namespace norcam.Models
         public string razon_social { get; set; }
 
         [Required(ErrorMessage="Por favor, Ingrese un ruc válido")]
-        [Display(Name="R. U. C.")]
+        [Display(Name="RUC")]
         public string ruc { get; set; }
 
         [Required(ErrorMessage="Por favor, Ingrese una dirección")]
