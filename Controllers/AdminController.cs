@@ -7,16 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using norcam.Models;
 using norcam.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace norcam.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public AdminController(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _um;
+        private readonly SignInManager<IdentityUser> _sim;
+        public AdminController(UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
         {
-            _context = context;
+            _um = um;
+            _sim = sim;
         }
 
 
@@ -24,6 +26,57 @@ namespace norcam.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _sim.SignOutAsync();
+
+            return RedirectToAction("index", "home");
+        }
+
+        [HttpPost]
+        public IActionResult Loginadm(string correo, string password)
+        {
+            var result = _sim.PasswordSignInAsync(correo, password, false, false).Result;
+
+            if (result.Succeeded) {
+                return RedirectToAction("index", "Ordenes");
+            } 
+
+            ModelState.AddModelError("", "Correo y/o contraseña incorrectos");
+
+            return View();
+        }
+
+        public IActionResult Registro()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Registro(string correo, string password)
+        {
+            var user = new IdentityUser();
+            user.Email = correo;
+            user.UserName = correo;
+
+            var result = _um.CreateAsync(user, password).Result;
+
+            if (result.Succeeded) {
+                return RedirectToAction("Index", "Ordenes");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View();
+        }
+
+
+
+
 
         public IActionResult Privacy()
         {

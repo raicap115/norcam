@@ -12,13 +12,19 @@
     <div class="container" style="margin-top: 20px;">
         <div class="row">
             <div><img src="~/images/norcam.jpg" alt="Logo_NorCam"></div>
-            <div>
-                <strong style="margin-left: 635px;">CONTROL INTERNO</strong><br>
-                <a asp-controller="Home" asp-action="Index"><button style="margin-top: 5px; margin-left: 720px;" type="button" class="btn btn-light">SALIR</button></a>
+            
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <strong>CONTROL INTERNO</strong><br>
+                <a href="~/admin/logout"><button style="margin-top: 5px;" type="button" class="btn btn-light">SALIR</button></a>
             </div>
+            
         </div>
     </div>
-
+    @if (User.Identity.IsAuthenticated) {
+                        <div>
+                            <a class="nav-link text-dark">Bienvenido, Sr.  @User.Identity.Name</a>                            
+                        </div>
+                        } 
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
