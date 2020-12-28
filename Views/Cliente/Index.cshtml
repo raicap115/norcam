@@ -82,10 +82,7 @@
                            @Html.DisplayFor(modelItem=> cliente.fax)
                        </td>
                        <td>
-                           <form action="Edit" method="post">
-                               <input type="hidden" name="Id" value="@cliente.id">
-                               <button class="btn btn-warning" style="text-align: center;">Editar</button>
-                           </form>
+                           <a asp-action="Edit" asp-route-id="@cliente.id">Edit</a>
                        </td>
                        <td>
                            <form action="Anular" method="post">

@@ -20,7 +20,7 @@ namespace norcam.Controllers
         }
         public IActionResult Index()
         {
-            var factura = _context.Orden.ToList();
+            var factura = _context.Factura.ToList();
             return View(factura);
         }
         public IActionResult Nuevo()

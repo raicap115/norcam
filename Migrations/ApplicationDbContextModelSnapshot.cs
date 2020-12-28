@@ -397,7 +397,7 @@ namespace norcam.Migrations
 
                     b.HasIndex("razon_socialid");
 
-                    b.ToTable("Orden");
+                    b.ToTable("Ordenes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -10,8 +10,8 @@ using norcam.Data;
 namespace norcam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201228050114_MigracionE")]
-    partial class MigracionE
+    [Migration("20201228054254_RedBull")]
+    partial class RedBull
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -399,7 +399,7 @@ namespace norcam.Migrations
 
                     b.HasIndex("razon_socialid");
 
-                    b.ToTable("Orden");
+                    b.ToTable("Ordenes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

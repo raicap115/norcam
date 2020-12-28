@@ -4,10 +4,25 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace norcam.Migrations
 {
-    public partial class LofiGaa : Migration
+    public partial class RedBull : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Admin",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nombre = table.Column<string>(nullable: true),
+                    apellido = table.Column<string>(nullable: true),
+                    puesto = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admin", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -45,6 +60,23 @@ namespace norcam.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cliente",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    razon_social = table.Column<string>(nullable: false),
+                    ruc = table.Column<string>(nullable: false),
+                    direccion = table.Column<string>(nullable: false),
+                    telefono = table.Column<string>(nullable: false),
+                    fax = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cliente", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,8 +125,8 @@ namespace norcam.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -138,8 +170,8 @@ namespace norcam.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -151,6 +183,104 @@ namespace norcam.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ordenes",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    fec_rec = table.Column<string>(nullable: true),
+                    cod_clienteid = table.Column<int>(nullable: true),
+                    razon_socialid = table.Column<int>(nullable: true),
+                    proveedor = table.Column<string>(nullable: true),
+                    dua = table.Column<string>(nullable: true),
+                    cif = table.Column<double>(nullable: false),
+                    contenido = table.Column<string>(nullable: true),
+                    peso = table.Column<double>(nullable: false),
+                    ubicacion = table.Column<string>(nullable: true),
+                    regimen = table.Column<string>(nullable: true),
+                    fec_num = table.Column<string>(nullable: true),
+                    fec_entrega = table.Column<string>(nullable: true),
+                    tc = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ordenes", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Ordenes_Cliente_cod_clienteid",
+                        column: x => x.cod_clienteid,
+                        principalTable: "Cliente",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Ordenes_Cliente_razon_socialid",
+                        column: x => x.razon_socialid,
+                        principalTable: "Cliente",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Factura",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    cod_ordenid = table.Column<int>(nullable: true),
+                    fec_fac = table.Column<string>(nullable: true),
+                    cod_clienteid = table.Column<int>(nullable: true),
+                    fec_canc = table.Column<string>(nullable: true),
+                    archivo = table.Column<string>(nullable: true),
+                    duaid = table.Column<int>(nullable: true),
+                    cifid = table.Column<int>(nullable: true),
+                    tcid = table.Column<int>(nullable: true),
+                    adval = table.Column<double>(nullable: false),
+                    igv_adu = table.Column<double>(nullable: false),
+                    ipm = table.Column<double>(nullable: false),
+                    reintegro = table.Column<double>(nullable: false),
+                    total_liq = table.Column<double>(nullable: false),
+                    gasto_ope = table.Column<double>(nullable: false),
+                    gasto_admin = table.Column<double>(nullable: false),
+                    sup_cont = table.Column<double>(nullable: false),
+                    comision = table.Column<double>(nullable: false),
+                    igv_fact = table.Column<double>(nullable: false),
+                    total_neto = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Factura", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Factura_Ordenes_cifid",
+                        column: x => x.cifid,
+                        principalTable: "Ordenes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Factura_Cliente_cod_clienteid",
+                        column: x => x.cod_clienteid,
+                        principalTable: "Cliente",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Factura_Ordenes_cod_ordenid",
+                        column: x => x.cod_ordenid,
+                        principalTable: "Ordenes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Factura_Ordenes_duaid",
+                        column: x => x.duaid,
+                        principalTable: "Ordenes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Factura_Ordenes_tcid",
+                        column: x => x.tcid,
+                        principalTable: "Ordenes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -189,10 +319,48 @@ namespace norcam.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Factura_cifid",
+                table: "Factura",
+                column: "cifid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Factura_cod_clienteid",
+                table: "Factura",
+                column: "cod_clienteid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Factura_cod_ordenid",
+                table: "Factura",
+                column: "cod_ordenid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Factura_duaid",
+                table: "Factura",
+                column: "duaid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Factura_tcid",
+                table: "Factura",
+                column: "tcid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ordenes_cod_clienteid",
+                table: "Ordenes",
+                column: "cod_clienteid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ordenes_razon_socialid",
+                table: "Ordenes",
+                column: "razon_socialid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Admin");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -209,10 +377,19 @@ namespace norcam.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Factura");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Ordenes");
+
+            migrationBuilder.DropTable(
+                name: "Cliente");
         }
     }
 }

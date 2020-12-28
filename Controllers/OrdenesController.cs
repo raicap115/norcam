@@ -21,7 +21,7 @@ namespace norcam.Controllers
 
         public IActionResult Index()
         {
-            var orden = _context.Orden.ToList();
+            var orden = _context.Ordenes.ToList();
             return View(orden);
         }
 
