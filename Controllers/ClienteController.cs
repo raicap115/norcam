@@ -85,10 +85,10 @@ namespace norcam.Controllers
             return new JsonResult(cliente);
         }
 
-    public IActionResult Nuevo()
-    {
-        return View();
-    }
+        public IActionResult Nuevo()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Nuevo(Cliente objCliente)

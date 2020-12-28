@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "Órdenes de Trabajo";
 }
-@model Ordenes
+@model IEnumerable<Ordenes>
 @{
     Layout="_LayoutCInt";
 }
@@ -29,111 +29,70 @@
 
 
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-lg-11">
         <table class="table table-hover" style="margin-top: 35px;">
             <thead>
                 <tr>
-                    <th style="text-align: center;"># Orden</th>
-                    <th style="text-align: center;">Recepción</th>
-                    <th style="text-align: center;">Cliente</th>
-                    <th style="text-align: center;">Contenido</th>
-                </tr>
+                        <th style="text-align: center;">
+                            @Html.DisplayNameFor(model=> model.id)
+                        </th>
+                        <th style="text-align: center;">
+                            @Html.DisplayNameFor(model=> model.fec_rec)
+                        </th>
+                        <th colspan="2" style="text-align: center;">
+                            @Html.DisplayNameFor(model=> model.razon_social)
+                        </th>
+                        <th style="text-align: center;">
+                            @Html.DisplayNameFor(model=> model.contenido)
+                        </th>
+                        <th colspan="2" style="text-align: center; font-weight: bold;">
+                            Opciones
+                        </th>
+                    </tr>
             </thead>            
             <tbody>
-                
+                @foreach (var ordenes in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> ordenes.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> ordenes.fec_rec)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> ordenes.cod_cliente)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> ordenes.razon_social)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> ordenes.contenido)
+                        </td>
+                        <td>
+                            <form action="Edit" method="post">
+                               <input type="hidden" name="Id" value="@ordenes.id">
+                               <button class="btn btn-warning" style="text-align: center;">Editar</button>
+                           </form>
+                        </td>
+                        <td>
+                            <form action="Anular" method="post">
+                               <input type="hidden" name ="Id" value="@ordenes.id">
+                               <button class="btn btn-danger" style="text-align: center;">Anular</button>
+                           </form>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
-    <div class="col-md-2">
+    <div class="col-lg-1">
         <form action="" method="post">
             <table style="text-align: center;">
                 <tr>
                     <td>
-                        <button type="button" style="margin-top: 120px;" class="btn btn-info" data-toggle="modal" data-target="#nuevoCliente" >
-                            NUEVO
-                        </button>
-                    </td>
-                    <!-- Modal -->
-                    <div class="modal fade" id="nuevoCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nueva Órden</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="container h-100">
-                            <form method="post" action="">
-                                <div class="form-group">
-                                    <label asp-for="fec_rec"></label>
-                                    <input type="text" asp-for="fec_rec" class="form-control">
-                                    <span asp-validation-for="fec_rec" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="proveedor"></label>
-                                    <input type="text" asp-for="proveedor" class="form-control">
-                                    <span asp-validation-for="proveedor" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="contenido"></label>
-                                    <input type="text" asp-for="contenido" class="form-control">
-                                    <span asp-validation-for="contenido" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="peso"></label>
-                                    <input type="text" asp-for="peso" class="form-control">
-                                    <span asp-validation-for="peso" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="ubicacion"></label>
-                                    <input type="text" asp-for="ubicacion" class="form-control">
-                                    <span asp-validation-for="ubicacion" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="regimen"></label>
-                                    <input type="text" asp-for="regimen" class="form-control">
-                                    <span asp-validation-for="regimen" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="fec_num"></label>
-                                    <input type="text" asp-for="fec_num" class="form-control">
-                                    <span asp-validation-for="fec_num" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="fec_entrega"></label>
-                                    <input type="text" asp-for="fec_entrega" class="form-control">
-                                    <span asp-validation-for="fec_entrega" class="text-danger"></span>  
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="valor_num"></label>
-                                    <input type="text" asp-for="valor_num" class="form-control">
-                                    <span asp-validation-for="valor_num" class="text-danger"></span>  
-                                </div>
-                            </form>
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                            <button type="submit" name="button" class="btn login_btn">Grabar</button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </tr>
-                <tr>
-                    <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="MODIFICAR"></td>
-                </tr>
-                <tr>
-                    <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="ANULAR"></td>
-                </tr>
-                <tr>
-                    <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="BUSCAR"></td>
+                        <a asp-controller="Ordenes" asp-action="Nuevo"><button style="margin-top: 45px;" type="button" class="btn btn-info">NUEVO</button></a>
+                    </td>                    
                 </tr>
             </table>
         </form>

@@ -1,5 +1,5 @@
  @{
-    ViewData["Title"] = "Facturas";
+    ViewData["Title"] = "Clientes";
 }
 
 @model IEnumerable<Cliente>
@@ -32,7 +32,7 @@
 
 
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-lg-11">
         <table class="table table-hover" style="margin-top: 35px;">
             <thead>
                 <tr>
@@ -54,11 +54,8 @@
                     <th style="text-align: center;">
                         @Html.DisplayNameFor(model=> model.fax)
                     </th>
-                    <th style="text-align: center; font-weight: bold;">
-                        Editar
-                    </th>
-                    <th style="text-align: center; font-weight: bold;">
-                        Anular
+                    <th colspan="2" style="text-align: center; font-weight: bold;">
+                        Opciones
                     </th>
                 </tr>
             </thead>            
@@ -101,16 +98,13 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-2">
+    <div class="col-lg-1">
         <form action="" method="post">
             <table style="text-align: center;">
                 <tr>
                     <td>
-                        <a asp-controller="Cliente" asp-action="Nuevo"><button type="button" class="btn btn-info">NUEVO</button></a>
+                        <a asp-controller="Cliente" asp-action="Nuevo"><button style="margin-top: 45px;" type="button" class="btn btn-info">NUEVO</button></a>
                     </td>                    
-                </tr>
-                <tr>
-                    <td><input style="margin-top: 20px;" type="button" class="btn btn-info" value="BUSCAR"></td>
                 </tr>
             </table>
         </form>

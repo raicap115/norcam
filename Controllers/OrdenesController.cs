@@ -18,12 +18,30 @@ namespace norcam.Controllers
         {
             _context = context;
         }
-        
+
         public IActionResult Index()
+        {
+            var orden = _context.Orden.ToList();
+            return View(orden);
+        }
+
+        [HttpPost]
+        public IActionResult Nuevo(Ordenes objOrden)
+        {
+            if (ModelState.IsValid) {
+
+                _context.Add(objOrden);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(objOrden);
+        }
+
+        public IActionResult Nuevo()
         {
             return View();
         }
-
         
     }
 }

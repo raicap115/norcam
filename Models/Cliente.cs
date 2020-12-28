@@ -6,7 +6,7 @@ namespace norcam.Models
     public class Cliente
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name="ID Cliente")]
+        [Display(Name="# Cliente")]
         public int id { get; set; }
 
         [Required(ErrorMessage="Por favor, Ingrese una razón social")]
