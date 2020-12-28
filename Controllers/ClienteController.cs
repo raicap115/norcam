@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using norcam.Models;
 using norcam.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace norcam.Controllers
 {
     public class ClienteController : Controller
@@ -35,19 +37,45 @@ namespace norcam.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var contacto = await _context.Cliente.FindAsync(id);
+            if (contacto == null)
+            {
+                return NotFound();
+            }
+            return View(contacto);
+        }
+        
         [HttpPost]
-        public IActionResult Editar(Cliente cl){
-            Cliente cliente = _context.Cliente.Where(x => x.id == cl.id).FirstOrDefault();
-            _context.Remove(cliente);
-            _context.SaveChanges();
-            cliente.razon_social = cl.razon_social;
-            cliente.ruc = cl.ruc;
-            cliente.direccion = cl.direccion;
-            cliente.telefono = cl.telefono;
-            cliente.fax = cl.fax;
-            _context.Add(cliente);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,razon_social,ruc,direccion,telefono,fax")] Cliente cli)
+        {
+            if (id != cli.id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(cli);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                    
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(cli);
         }
 
         [HttpGet]
@@ -69,9 +97,10 @@ namespace norcam.Controllers
 
                 _context.Add(objCliente);
                 _context.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return View("Index","Cliente");
+            return View(objCliente);
         }
     }
 }
