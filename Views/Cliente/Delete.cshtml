@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+@{
+    Layout="_LayoutCnt";
+}
+@model Cliente
+
+<h3>¿Está seguro que desea eliminar este cliente?</h3>
+    <div>
+            <hr />
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.razon_social)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.razon_social)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.ruc)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.ruc)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.direccion)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.direccion)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.telefono)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.telefono)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.fax)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.fax)
+                </dd>
+            </dl>
+            
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="id"/>
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a asp-action="Index">Back to List</a>
+            </form>
+    </div>     
+                  

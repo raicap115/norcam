@@ -46,6 +46,11 @@ namespace norcam.Controllers
             return View(objCliente);
         }
 
+        private bool ClienteExists(int id)
+        {
+            return _context.Cliente.Any(e => e.id == id);
+        }
+
         // GET: Empleado/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -80,11 +85,47 @@ namespace norcam.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!ClienteExists(cliente.id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(cliente);
+        }
+
+        // GET: Empleado/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cliente = await _context.Cliente
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            return View(cliente);
+        }
+
+        // POST: Empleado/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var cliente = await _context.Cliente.FindAsync(id);
+            _context.Cliente.Remove(cliente);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
