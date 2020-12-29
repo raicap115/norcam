@@ -106,7 +106,7 @@ namespace norcam.Controllers
             }
 
             var cliente = await _context.Cliente
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.id == id); 
             if (cliente == null)
             {
                 return NotFound();
