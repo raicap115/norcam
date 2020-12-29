@@ -1,7 +1,7 @@
 @{
-    ViewData["Title"] = "Recibos de la Orden";
+    ViewData["Title"] = "Recibos";
 }
-
+@model IEnumerable<Recibos>
 @{
     Layout="_LayoutCInt";
 }
@@ -26,22 +26,61 @@
     </ul>
 </div>
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-lg-11">
         <table class="table table-hover" style="margin-top: 35px;">
             <thead>
                 <tr>
-                    <th style="text-align: center;"># Orden</th>
-                    <th style="text-align: center;">Recepción</th>
-                    <th style="text-align: center;">Cliente</th>
-                    <th style="text-align: center;">Contenido</th>
+                        <th style="text-align: center;">
+                            @Html.DisplayNameFor(model=> model.id)
+                        </th>
+                        <th style="text-align: center;">
+                            @Html.DisplayNameFor(model=> model.fec_pago)
+                        </th>
+                        <th colspan="2" style="text-align: center;">
+                            @Html.DisplayNameFor(model=> model.doc_cob)
+                        </th>
+                        <th style="text-align: center;">
+                            @Html.DisplayNameFor(model=> model.factura)
+                        </th>
+                        <th colspan="2" style="text-align: center; font-weight: bold;">
+                            Opciones
+                        </th>
                 </tr>
             </thead>
             <tbody>
-
+                @foreach (var recibos in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> recibos.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> recibos.fec_pago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> recibos.doc_cob)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(ModelItem=> recibos.factura)
+                        </td>
+                        <td>
+                            <form action="Edit" method="post">
+                               <input type="hidden" name="Id" value="@recibos.id">
+                               <button class="btn btn-warning" style="text-align: center;">Editar</button>
+                           </form>
+                        </td>
+                        <td>
+                            <form action="Anular" method="post">
+                               <input type="hidden" name ="Id" value="@recibos.id">
+                               <button class="btn btn-danger" style="text-align: center;">Anular</button>
+                           </form>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
-    <div class="col-md-2">
+    <div class="col-lg-1">
         <form action="" method="post">
             <table style="text-align: center;">
                 <tr>
