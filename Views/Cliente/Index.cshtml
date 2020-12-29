@@ -63,30 +63,30 @@
                @foreach (var cliente in Model)
                {
                    <tr>
-                       <td>
+                       <td style="text-align: center;">
                            @Html.DisplayFor(modelItem=> cliente.id)
                        </td>
-                       <td>
+                       <td style="text-align: center;">
                            @Html.DisplayFor(modelItem=> cliente.razon_social)
                        </td>
-                       <td>
+                       <td style="text-align: center;">
                            @Html.DisplayFor(modelItem=> cliente.ruc)
                        </td>
-                       <td>
+                       <td style="text-align: center;">
                            @Html.DisplayFor(modelItem=> cliente.direccion)
                        </td>
-                       <td>
+                       <td style="text-align: center;">
                            @Html.DisplayFor(modelItem=> cliente.telefono)
                        </td>
-                       <td>
+                       <td style="text-align: center;">
                            @Html.DisplayFor(modelItem=> cliente.fax)
                        </td>
-                       <td>
+                       <td style="text-align: center;">
                            <a asp-action="Edit" asp-route-id="@cliente.id">
                                <button class="btn btn-warning" style="text-align: center;">Editar</button>
                            </a>
                        </td>
-                       <td>
+                       <td style="text-align: center;">
                            <a asp-action="Delete" asp-route-id="@cliente.id">
                                <button class="btn btn-danger" style="text-align: center;">Anular</button>
                            </a>
