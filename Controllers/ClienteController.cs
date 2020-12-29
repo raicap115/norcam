@@ -98,8 +98,6 @@ namespace norcam.Controllers
             }
             return View(cliente);
         }
-
-        // GET: Empleado/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,8 +114,6 @@ namespace norcam.Controllers
 
             return View(cliente);
         }
-
-        // POST: Empleado/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
